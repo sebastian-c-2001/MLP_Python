@@ -1,0 +1,47 @@
+from sklearn import neural_network
+import numpy as np
+import random
+
+data = np.loadtxt("data.txt", dtype='i', delimiter=',')
+
+random.shuffle(data)
+
+a=np.array(data[:,1:])
+b=np.array(data[:,0])
+
+np.delete(a,2,1)
+np.delete(a,3,1)
+
+
+date_test=a[110:195]
+etichete_test=b[110:195] 
+
+date_train=np.vstack((a[:109],a[196:]))
+etichete_train=np.append(b[:109],b[196:])
+
+
+#print(etichete_test)
+
+#75% din 336=254
+
+def procent(x,y):
+    nr=0
+    for i in range (len(etichete_test)): 
+        if x[i]==y[i]:
+            nr=nr+1;
+    return 100*nr/len(etichete_test)
+
+s=0
+    
+for i in range(5):
+    clf=neural_network.MLPClassifier(hidden_layer_sizes=(8,8),learning_rate_init=0.01,max_iter=1000)
+    #antrenare
+    clf.fit(date_train,etichete_train)
+    #predictii
+    predictii=clf.predict(date_test)
+    #rata de succes
+    a=procent(predictii,etichete_test)
+    #print("Rata",i+1,":",a)
+    s=s+a
+    
+print("Rata de succes pe 5 rulari:",s/5)

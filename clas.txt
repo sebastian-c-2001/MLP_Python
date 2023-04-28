@@ -1,0 +1,1 @@
+lung,head&neck,esophasus,thyroid,stomach,duoden&sm.int,colon,rectum,anus,salivaryglands,pancreas,gallblader,liver,kidney,bladder,testis,prostate,ovary,corpusuteri,cervixuteri,vagina,breast
